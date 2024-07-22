@@ -15,7 +15,7 @@ function NavbarOffcanvas() {
   return (
     <>
       {['sm'].map((expand) => (
-        <Navbar key={expand} expand={expand} className="bg-body-tertiary mb-3">
+        <Navbar key={expand} expand={expand} className="bg-body-tertiary">
           <Container fluid>
             <Navbar.Brand href="#">
               <img className={styles.logo} src='/logo.png' alt="Logo" />
@@ -32,7 +32,7 @@ function NavbarOffcanvas() {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
+                <Nav style={{"font-size": 'larger', 'font-weight': 'bolder'}} className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link href="#action1">Home</Nav.Link>
                   <Nav.Link href="#action2">GYM</Nav.Link>
                   <Nav.Link href="#action2">Trainers</Nav.Link>
