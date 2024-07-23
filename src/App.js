@@ -2,6 +2,7 @@ import './App.css';
 import OffcanvasExample from './components/Navbar/Navbar';
 import ControlledCarousel from './components/Carousel/Carousel';
 import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
     <OffcanvasExample/>
     <ControlledCarousel/>
     <Login/>
+    <Signup/>
     </div>
   );
 }

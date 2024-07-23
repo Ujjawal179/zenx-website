@@ -35,9 +35,9 @@ function NavbarOffcanvas() {
                 <Nav style={{"font-size": 'larger', 'font-weight': 'bolder'}} className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link href="#action1">Home</Nav.Link>
                   <Nav.Link href="#action2">GYM</Nav.Link>
-                  <Nav.Link href="#action2">Trainers</Nav.Link>
-                  <Nav.Link href="#action2">About</Nav.Link>
-                  <Nav.Link href="#action2"></Nav.Link>
+                  <Nav.Link href="#action3">Trainers</Nav.Link>
+                  <Nav.Link href="#action4">About</Nav.Link>
+                  <Nav.Link href="#action5"></Nav.Link>
 
                 </Nav>
               </Offcanvas.Body>
