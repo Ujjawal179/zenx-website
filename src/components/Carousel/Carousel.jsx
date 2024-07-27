@@ -13,7 +13,7 @@ function ControlledCarousel() {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
+    <Carousel activeIndex={index} onSelect={handleSelect} fade>
       <Carousel.Item>
         <img className={styles.bg} src='/bg.jpg' alt="first slide" />
         <Carousel.Caption>

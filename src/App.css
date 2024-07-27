@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
 
 :root {
   --background-color: #000;  /* Dark theme default */
@@ -7,6 +8,17 @@
   /* Add more variables for specific elements */
 }
 
+.head{
+  margin: 1rem;
+  text-shadow: 1px 1px 2px black, 1px 1px 5px #ffffff;
+  font-weight: 900;
+  font-family: Titillium Web;
+}
+
+.highlighted {
+  /* Add your styles for the highlighted font class here */
+  color: #cd2e35;
+}
 
 body {
   margin: 0;

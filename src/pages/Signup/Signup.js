@@ -24,17 +24,24 @@ function Signup() {
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
+                <h1 className="m-0">Hello,</h1>
+                <h1 className="highlighted head m-0">Welcome!</h1>
+                <p>Already have Account, Log In!</p>
                 <Form.Label>Name</Form.Label>
                 <Form.Control type="text" placeholder="Full Name" />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicphone">
-            <Form.Label>Phone Number</Form.Label>
-              <div className=" d-flex">
-                <Form.Control type="phone" placeholder="Enter Phone Number" />
-                <Button className="mx-2 text-nowrap" variant="primary" type="submit">
+                <Form.Label>Phone Number</Form.Label>
+                <div className=" d-flex">
+                  <Form.Control type="phone" placeholder="Enter Phone Number" />
+                  <Button
+                    className="mx-2 text-nowrap"
+                    variant="primary"
+                    type="submit"
+                  >
                     Get OTP
-                </Button>
-              </div>
+                  </Button>
+                </div>
                 <Form.Text className="text-muted">
                   We'll never share your Phone Number with anyone else.
                 </Form.Text>

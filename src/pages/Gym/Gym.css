@@ -1,0 +1,27 @@
+
+
+.gym-text-bg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30vh;
+    min-width: 100%;
+    background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48');
+    background-size: cover;
+}
+
+.intro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.question{
+    font-weight: bold;
+    text-decoration: underline red 1px;
+    text-underline-position: under;
+    margin: 2rem;
+}
