@@ -39,6 +39,7 @@ function NavbarOffcanvas() {
                   <Nav.Link href="/">About</Nav.Link>
                   <Nav.Link href="login">LogIn</Nav.Link>
                   <Nav.Link href="signup">SignUp</Nav.Link>
+                  <Nav.Link href="User">User</Nav.Link>
 
                 </Nav>
               </Offcanvas.Body>
