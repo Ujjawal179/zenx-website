@@ -10,7 +10,7 @@ import GoogleButton from 'react-google-button'
 function Login() {
     return ( 
         <>
-        <Container fluid className='mt-4'>
+        <Container fluid className='mt-4' style={{minHeight:"85vh"}}>
             <Row className=" justify-content-center align-items-center">
                 <Col  xs={8} md={4}>
                 <Image src="/logo.png" rounded style={{"width":"-webkit-fill-available", padding:"auto"}}/>

@@ -4,20 +4,21 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
 import styles from "./Profile.module.css";
 
 
 function Profile() {
-  const [Name, setName] = React.useState(0);
-  const [Email, setEmail] = React.useState(0);
-  const [PhoneNumber, setPhoneNumber] = React.useState(0);
+  const [Name, setName] = React.useState('Ujjawal');
+  const [Email, setEmail] = React.useState('Ujjawal@gmail.com');
+  const [PhoneNumber, setPhoneNumber] = React.useState(276874248);
   const [Pic, setPic] = React.useState('/bg.jpg ');
-  const [Weight, setWeight] = React.useState(0);
-  const [Height, setHeight] = React.useState(0);
+  const [Weight, setWeight] = React.useState(30);
+  const [Height, setHeight] = React.useState(330);
   const [Gender, setGender] = React.useState(0);
 
 return (
-    <>
+    <div >
         <h1 className="highlighted head text-center">Edit Profile</h1>
         <div className={styles.profile}>
             <div className="d-flex flex-column mw-40 justify-content-center align-items-center">
@@ -32,6 +33,7 @@ return (
                     variant="standard"
                     onChange={(e) => setName(e.target.value)}
                     value={Name}
+                    style={{marginTop:'20px'}}
                 />
                 <TextField
                     className={styles.phoneNumber}
@@ -40,6 +42,7 @@ return (
                     variant="standard"
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     value={PhoneNumber}
+                    style={{marginTop:'20px'}}
                 />
                 <TextField
                     className={styles.email}
@@ -48,6 +51,7 @@ return (
                     variant="standard"
                     onChange={(e) => setEmail(e.target.value)}
                     value={Email}
+                    style={{marginTop:'20px'}}
                 />
                 <div>
                     <TextField
@@ -57,6 +61,7 @@ return (
                         variant="standard"
                         onChange={(e) => setWeight(e.target.value)}
                         value={Weight}
+                        style={{marginTop:'20px', marginRight:'20px'}}
                     />
                     <TextField
                         className={styles.height}
@@ -66,9 +71,10 @@ return (
                         variant="standard"
                         onChange={(e) => setHeight(e.target.value)}
                         value={Height}
+                        style={{marginTop:'20px'}}
                     />
                 </div>
-                <FormControl fullWidth style={{maxWidth:'100px'}}>
+                <FormControl fullWidth style={{maxWidth:'100px', marginTop:'20px'}}>
                     <InputLabel variant="standard" htmlFor="uncontrolled-native">
                         Gender
                     </InputLabel>
@@ -85,9 +91,12 @@ return (
                         <option value={0}>Female</option>
                     </NativeSelect>
                 </FormControl>
+                <Button className={styles.updatebtn} type="submit">
+                            Submit
+                </Button>
             </div>
         </div>
-    </>
+    </div>
 );
 }
 

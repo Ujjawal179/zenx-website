@@ -48,17 +48,13 @@ export default function BasicTabs() {
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Profile" {...a11yProps(0)} />
           <Tab label="Payments" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
+      <CustomTabPanel value={value} index={0} style={{minHeight:"85vh"}}>
         <Profile />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
+      <CustomTabPanel value={value} index={1} style={{minHeight:"85vh"}}>
         <Payment />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        Item Three
       </CustomTabPanel>
     </Box>
   );

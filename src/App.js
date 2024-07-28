@@ -7,6 +7,7 @@ import Trainers from "./pages/Trainers/Trainers";
 import Gym from "./pages/Gym/Gym";
 import User from "./pages/User/User";
 import NavbarOffcanvas from "./components/Navbar/Navbar";
+import Footer from './components/Footer/Footer';
   import { createTheme } from "@mui/material/styles";
 
 function App() {
@@ -41,6 +42,8 @@ function App() {
           <Route path="/user" element={<User />} />
         </Routes>
       </Router>
+      <Footer />
+
     </div>
   );
 }

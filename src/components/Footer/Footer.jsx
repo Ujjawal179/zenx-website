@@ -5,7 +5,7 @@ import { FaMapMarkerAlt, FaPhone, FaEnvelopeOpen, FaFacebookF, FaTwitter, FaGoog
 const Footer = () => {
     return (
         <footer className={styles.footerSection}>
-            <div className={styles.container}>
+            <div c>
                 <div className={`${styles.footerContent} pt-5 pb-5`}>
                     <div className="row">
                         <div className="col-xl-4 col-lg-4 mb-50">

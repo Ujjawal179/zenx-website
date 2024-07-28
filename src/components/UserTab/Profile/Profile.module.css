@@ -1,8 +1,3 @@
-.profilepic{
-    width: 80vw;
-    max-width: 400px;
-
-}
 
 .profile{
     display: flex;
@@ -12,6 +7,13 @@
     margin-top: 50px;
 }
 
+.profilepic{
+    width: 80vw;
+    max-width: 400px;
+
+}
+
+
 
 .profileDetails{
     display: flex;
@@ -20,24 +22,42 @@
     padding-left: 10vw;
 }
 
-.name{
+.name, .email, .phoneNumber{
     width: 100%;
     min-width: 250px;
     max-width: 400px;
-    margin: 10px 0px;
 }
 
 .gender{
     width: 100px;
-    margin: 10px 0px;
 }
 
 .height{
-    width: 100px;
-    margin: 10px 0px;
-    margin-left: 20px;
+    max-width: 150px;
+    width: 50%;
 }
 .weight{
-    width: 100px;
-    margin: 10px 0px;
+    max-width: 150px;
+    width: 50%;
 }
+
+.updatebtn{
+
+    margin-top: 20px;
+    width: fit-content;
+    background-color: var(--accent-color);
+}
+
+@media screen and (max-width: 900px) {
+
+    .profileDetails {
+        padding-left: 0;
+        padding-top: 1rem;
+    }
+    .height{
+        width: 45%;
+    }
+    .weight{
+        width: 45%;
+    }
+} 

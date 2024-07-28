@@ -9,7 +9,7 @@ import Image from "react-bootstrap/Image";
 function Signup() {
   return (
     <>
-      <Container fluid className="mt-4">
+      <Container fluid className="mt-4" style={{minHeight:"85vh"}}>
         <Row className="justify-content-center align-items-center">
           <Col xs={6} md={4}>
             <Image

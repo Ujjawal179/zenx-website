@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap");
-
 :root {
   --brand-color: #cd2e35;
   --black: hsl(0, 0%, 0%);
@@ -8,45 +6,9 @@
   --font-text: "Lato", sans-serif;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body,
-h2,
-p {
-  margin: 0;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: var(--black);
-}
-
-h2 {
-  font-size: 2.25rem;
-  font-family: var(--font-title);
-  color: var(--white);
-  line-height: 1.1;
-}
-
-p {
-  font-family: var(--font-text);
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--white);
-}
-
 .flow > * + * {
   margin-top: var(--flow-space, 1em);
 }
-
-/* CARD COMPONENT */
 
 .cardContainer {
   display: flex;
@@ -86,6 +48,7 @@ p {
   align-self: flex-end;
   height: 55%;
   padding: 12% 1.25rem 1.875rem;
+  color: var(--white);
   background: linear-gradient(
     180deg,
     hsla(0, 0%, 0%, 0) 0%,
