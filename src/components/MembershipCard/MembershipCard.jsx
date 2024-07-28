@@ -13,8 +13,8 @@ function MembershipCard({color = 1}) {
                         <h3>$100</h3>
                     </div>
                     <div className={styles.date}>
-                        <p>Valid Upto</p>
-                        <h3>23/12/2034</h3>
+                        <p className="m-0">Valid Upto</p>
+                        <h4>23/12/2034</h4>
                     </div>
                 </div>
             </div>
