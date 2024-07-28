@@ -5,6 +5,7 @@
   --background-color: #000;  /* Dark theme default */
   --text-color: #fff;
   --accent-color: #cd2e35;
+  --history : rgb(0, 0, 0, 0.6);
   /* Add more variables for specific elements */
 }
 

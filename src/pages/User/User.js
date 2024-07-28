@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Payment from '../../components/UserTab/Payment/Payment';
 import Profile from '../../components/UserTab/Profile/Profile';
+import Membership from '../../components/UserTab/Membership/Membership';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,6 +48,7 @@ export default function BasicTabs() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Profile" {...a11yProps(0)} />
+          <Tab label="Memberships" {...a11yProps(2)} />
           <Tab label="Payments" {...a11yProps(1)} />
         </Tabs>
       </Box>
@@ -54,6 +56,9 @@ export default function BasicTabs() {
         <Profile />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1} style={{minHeight:"85vh"}}>
+        < Membership/>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2} style={{minHeight:"85vh"}}>
         <Payment />
       </CustomTabPanel>
     </Box>
