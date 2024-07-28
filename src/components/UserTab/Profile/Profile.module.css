@@ -1,0 +1,43 @@
+.profilepic{
+    width: 80vw;
+    max-width: 400px;
+
+}
+
+.profile{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 50px;
+}
+
+
+.profileDetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10vw;
+}
+
+.name{
+    width: 100%;
+    min-width: 250px;
+    max-width: 400px;
+    margin: 10px 0px;
+}
+
+.gender{
+    width: 100px;
+    margin: 10px 0px;
+}
+
+.height{
+    width: 100px;
+    margin: 10px 0px;
+    margin-left: 20px;
+}
+.weight{
+    width: 100px;
+    margin: 10px 0px;
+}
