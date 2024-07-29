@@ -6,6 +6,7 @@ import Signup from "./pages/Signup/Signup";
 import Trainers from "./pages/Trainers/Trainers";
 import Gym from "./pages/Gym/Gym";
 import User from "./pages/User/User";
+import GymDetail from "./pages/Gym/GymDetail/GymDetail";
 import NavbarOffcanvas from "./components/Navbar/Navbar";
 import Footer from './components/Footer/Footer';
   import { createTheme } from "@mui/material/styles";
@@ -38,6 +39,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/gym" element={<Gym />} />
+          <Route path="/gym/:gymId" element={<GymDetail />} />
           <Route path="/trainers" element={<Trainers />} />
           <Route path="/user" element={<User />} />
         </Routes>
