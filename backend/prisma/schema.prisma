@@ -1,19 +1,64 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "postgresql" // or "mysql", "sqlite", etc.
   url      = env("DATABASE_URL")
 }
-model User{
-  id        String   @id @default(uuid())
-  name      String
-  email     String  @unique
+
+model User {
+  id           String         @id @default(uuid())
+  name         String
+  password      String         
+  address      String?
+  phone        String         @unique
+  weight       Float?
+  height       Float?
+  gender       String?
+  profilePic   String?
+  ytLink       String?
+  description  String?
+  role         Role
+  memberships  Membership[]    @relation("UserMemberships")
+  gyms         Gym[]           @relation("GymOwner")
+  trainings    Trainer[]       @relation("TrainerOwner")
+}
+
+model Membership {
+  id           Int            @id @default(autoincrement())
+  prize        Float
+  title        String
+  validity     Int
+  description  String?
+  gymId        String?
+  trainerId    String?
+  userId       String?
+  gym          Gym?           @relation("GymMemberships", fields: [gymId], references: [id])
+  trainer      Trainer?       @relation("TrainerMemberships", fields: [trainerId], references: [id])
+  user         User?          @relation("UserMemberships", fields: [userId], references: [id])
+}
+
+model Gym {
+  id           String         @id @default(uuid())
+  name         String
+  location     String
+  ownerId      String?
+  owner        User?           @relation("GymOwner", fields: [ownerId], references: [id])
+  memberships  Membership[]    @relation("GymMemberships")
+}
+
+model Trainer {
+  id           String         @id @default(uuid())
+  name         String
+  specialty    String
+  ownerId      String?
+  owner        User?           @relation("TrainerOwner", fields: [ownerId], references: [id])
+  memberships  Membership[]    @relation("TrainerMemberships")
+}
+
+enum Role {
+  GYM_OWNER
+  TRAINER
+  CLIENT
 }
