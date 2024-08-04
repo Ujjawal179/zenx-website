@@ -45,7 +45,7 @@ function GymDetail() {
           </div>
         </div>
         <div className="membership-details">
-          <h1 className="head highlighted">Memberships</h1>
+          <h1 className="head highlighted">Subcriptions</h1>
           <MembershipCard />
           <MembershipCard />
         </div>

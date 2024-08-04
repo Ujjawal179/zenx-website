@@ -1,12 +1,10 @@
 .card{
     margin: 10px;
-    box-shadow: inset -1px -1px 6px 1px white, inset 1px 1px 6px 1px black;
     width: 80vw;
     min-width: 250px;
     max-width: 400px;
     height: fit-content;
     padding: 1rem;
-    border: solid 1px black;
     border-radius: 20px;
     flex-direction: column;
     display: flex;
