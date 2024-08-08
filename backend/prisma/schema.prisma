@@ -32,7 +32,12 @@ model Membership {
   userId       String?
   user         User?          @relation("UserMemberships", fields: [userId], references: [id])
 }
-
+model gym {
+  id          String         @id @default(uuid())
+  name        String
+  location    String
+  description String?
+}
 
 
 enum Role {
