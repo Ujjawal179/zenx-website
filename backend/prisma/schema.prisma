@@ -1,42 +1,95 @@
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "postgresql" // or "mysql", "sqlite", etc.
+//   url      = env("DATABASE_URL")
+// }
+
+// model User {
+//   id           String         @id @default(uuid())
+//   name         String
+//   password      String         
+//   address      String?
+//   phone        String         @unique
+//   weight       Float?
+//   height       Float?
+//   gender       String?
+//   profilePic   String?
+//   ytLink       String?
+//   description  String?
+//   role         Role
+//   memberships  Membership[]    @relation("UserMemberships")
+// }
+
+// model Membership {
+//   id           Int            @id @default(autoincrement())
+//   prize        Float
+//   title        String
+//   validity     Int
+//   description  String?
+//   userId       String?
+//   user         User?          @relation("UserMemberships", fields: [userId], references: [id])
+// }
+
+
+
+// enum Role {
+//   GYM_OWNER
+//   TRAINER
+//   CLIENT
+// }
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql" // or "mysql", "sqlite", etc.
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  CLIENT
+  TRAINER
+  GYM_OWNER
+}
+
 model User {
-  id           String         @id @default(uuid())
-  name         String
-  password      String         
-  address      String?
-  phone        String         @unique
-  weight       Float?
-  height       Float?
-  gender       String?
-  profilePic   String?
-  ytLink       String?
-  description  String?
-  role         Role
-  memberships  Membership[]    @relation("UserMemberships")
+  id          String       @id @default(uuid())
+  name        String
+  phoneNumber String       @unique
+  pictureUrl  String?
+  role        Role
+  weight      Float?        // only for clients
+  height      Float?        // only for clients
+  gender      String?       // only for clients
+  ytLink      String?       // only for trainers and gym owners
+  description String?       // only for trainers and gym owners
+  location    String?       // only for gym owners
+  password    String
+  memberships Membership[]  // for linking gym memberships to users
+  faculties   Membership[]  @relation("MembershipFaculties") // for linking trainers to memberships
 }
 
 model Membership {
-  id           Int            @id @default(autoincrement())
-  prize        Float
-  title        String
-  validity     Int
-  description  String?
-  userId       String?
-  user         User?          @relation("UserMemberships", fields: [userId], references: [id])
+  id          String     @id @default(uuid())
+  title       String
+  price       Float
+  validity    String
+  description String
+  userId      String     // references the gym owner
+  user        User       @relation(fields: [userId], references: [id])
+  activities  Activity[] @relation("MembershipActivities")
+  faculties   User[]     @relation("MembershipFaculties") // linking trainers to the membership
 }
 
-
-
-enum Role {
-  GYM_OWNER
-  TRAINER
-  CLIENT
+model Activity {
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  tags        String[]
+  memberships Membership[] @relation("MembershipActivities")
 }
+

@@ -20,7 +20,7 @@ export const register = async (req: Request, res: Response) => {
 
     // Check if the phone is already in use
     const existingUser = await prisma.user.findUnique({
-      where: { phone },
+      where: { phoneNumber: phone },
     });
 
     if (existingUser) {
@@ -35,7 +35,7 @@ export const register = async (req: Request, res: Response) => {
       data: {
         name,
         password: hashedPassword,
-        phone,
+        phoneNumber: phone,
         role,
       },
     });
@@ -57,8 +57,11 @@ export const login = async (req: Request, res: Response) => {
     const { phone, password } = validatedData;
 
     // Check if user exists
+    if(!phone){
+      res.status(402).json({error : "phone number doesn't exist"})
+    }
     const user = await prisma.user.findUnique({
-      where: { phone },
+      where: { phoneNumber: phone },
     });
 
     if (!user) {
@@ -89,30 +92,31 @@ export const logout = (req: Request, res: Response) => {
   });
   res.status(200).json({ success: true });
 };
-export const getUser=async (req:Request,res:Response)=>{
+
+export const getUser = async (req: Request, res: Response) => {
   const id = req.params.id;
   const user = await prisma.user.findUnique({
     where: { id },
   });
-  if(!user){
-    return res.status(404).json({error:"User not found"})
+
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
   }
+
   res.json(user);
+};
 
-
-
-} 
 export const postMembership = async (req: Request, res: Response) => {
   const userId = req.user?.id; // Get user ID from authenticated user
   const role = req.user?.role; // Get user role from authenticated user
-  const { prize, title, validity, description } = req.body;
+  const { price, title, validity, description } = req.body;
 
   if (!userId || !role) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  if (role !== "TRAINER") {
-    return res.status(403).json({ error: "Access denied. Only trainers can create memberships." });
+  if (role !== 'TRAINER') {
+    return res.status(403).json({ error: 'Access denied. Only trainers can create memberships.' });
   }
 
   try {
@@ -122,23 +126,23 @@ export const postMembership = async (req: Request, res: Response) => {
     });
 
     if (!trainer) {
-      return res.status(404).json({ error: "Trainer not found" });
+      return res.status(404).json({ error: 'Trainer not found' });
     }
 
     // Create the membership
     const membership = await prisma.membership.create({
       data: {
-        prize,
+        price,
         title,
         validity,
         description,
-        userId, // Assign the membership to the user
+        userId, // Assign the membership to the trainer
       },
     });
 
     res.status(201).json(membership);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -146,7 +150,7 @@ export const getMemberships = async (req: Request, res: Response) => {
   const userId = req.user?.id; // Get user ID from authenticated user
 
   if (!userId) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   try {
@@ -156,7 +160,7 @@ export const getMemberships = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: 'User not found' });
     }
 
     // Get memberships
@@ -166,7 +170,6 @@ export const getMemberships = async (req: Request, res: Response) => {
 
     res.status(200).json(memberships);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
-
