@@ -21,8 +21,6 @@ model User {
   description  String?
   role         Role
   memberships  Membership[]    @relation("UserMemberships")
-  gyms         Gym[]           @relation("GymOwner")
-  trainings    Trainer[]       @relation("TrainerOwner")
 }
 
 model Membership {
@@ -31,31 +29,11 @@ model Membership {
   title        String
   validity     Int
   description  String?
-  gymId        String?
-  trainerId    String?
   userId       String?
-  gym          Gym?           @relation("GymMemberships", fields: [gymId], references: [id])
-  trainer      Trainer?       @relation("TrainerMemberships", fields: [trainerId], references: [id])
   user         User?          @relation("UserMemberships", fields: [userId], references: [id])
 }
 
-model Gym {
-  id           String         @id @default(uuid())
-  name         String
-  location     String
-  ownerId      String?
-  owner        User?           @relation("GymOwner", fields: [ownerId], references: [id])
-  memberships  Membership[]    @relation("GymMemberships")
-}
 
-model Trainer {
-  id           String         @id @default(uuid())
-  name         String
-  specialty    String
-  ownerId      String?
-  owner        User?           @relation("TrainerOwner", fields: [ownerId], references: [id])
-  memberships  Membership[]    @relation("TrainerMemberships")
-}
 
 enum Role {
   GYM_OWNER

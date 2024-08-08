@@ -4,6 +4,7 @@ import UserRouter from './router/userRouter'
 const app = express();
 const port = 3001;
 import bodyParser = require('body-parser');
+app.use(require('cookie-parser')());
 app.use(cors());
 app.use(bodyParser.json());
 app.get('/', (req, res) => {

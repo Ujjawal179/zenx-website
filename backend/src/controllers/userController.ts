@@ -89,3 +89,84 @@ export const logout = (req: Request, res: Response) => {
   });
   res.status(200).json({ success: true });
 };
+export const getUser=async (req:Request,res:Response)=>{
+  const id = req.params.id;
+  const user = await prisma.user.findUnique({
+    where: { id },
+  });
+  if(!user){
+    return res.status(404).json({error:"User not found"})
+  }
+  res.json(user);
+
+
+
+} 
+export const postMembership = async (req: Request, res: Response) => {
+  const userId = req.user?.id; // Get user ID from authenticated user
+  const role = req.user?.role; // Get user role from authenticated user
+  const { prize, title, validity, description } = req.body;
+
+  if (!userId || !role) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  if (role !== "TRAINER") {
+    return res.status(403).json({ error: "Access denied. Only trainers can create memberships." });
+  }
+
+  try {
+    // Validate trainer existence
+    const trainer = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!trainer) {
+      return res.status(404).json({ error: "Trainer not found" });
+    }
+
+    // Create the membership
+    const membership = await prisma.membership.create({
+      data: {
+        prize,
+        title,
+        validity,
+        description,
+        userId, // Assign the membership to the user
+      },
+    });
+
+    res.status(201).json(membership);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getMemberships = async (req: Request, res: Response) => {
+  const userId = req.user?.id; // Get user ID from authenticated user
+
+  if (!userId) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  try {
+    // Validate user existence
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Get memberships
+    const memberships = await prisma.membership.findMany({
+      where: { userId },
+    });
+
+    res.status(200).json(memberships);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
