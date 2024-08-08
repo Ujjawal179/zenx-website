@@ -2,12 +2,12 @@
 export interface UserInfer {
     id: string;
     name: string;
-    phone: string;
+    phoneNumber: string;
     password: string;
     weight: number | null;
     height: number | null;
     gender: string | null;
-    profilePic: string | null;
+    pictureUrl: string | null;
     ytLink: string | null;
     description: string | null;
     role: String;
