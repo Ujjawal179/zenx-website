@@ -3,45 +3,71 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql" // or "mysql", "sqlite", etc.
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CLIENT
+  TRAINER
+  GYM_OWNER
 }
 
 model User {
   id           String         @id @default(uuid())
   name         String
-  password      String         
-  address      String?
-  phone        String         @unique
-  weight       Float?
-  height       Float?
-  gender       String?
-  profilePic   String?
-  ytLink       String?
-  description  String?
+  phoneNumber  String         @unique
+  pictureUrl   String?
   role         Role
-  memberships  Membership[]    @relation("UserMemberships")
+  weight       Float?          // only for clients
+  height       Float?          // only for clients
+  gender       String?         // only for clients
+  ytLink       String?         // only for trainers and gym owners
+  description  String?         // only for trainers and gym owners
+  location     String?         // only for gym owners
+  password     String
+  memberships  Membership[]    // for linking gym memberships to users
+  faculties    Membership[]    @relation("MembershipFaculties") // for linking trainers to memberships
+  gyms         Gym[]           @relation("UserGym")
+  ownedGyms    Gym[]           @relation("UserOwnedGyms") // Linking the user as a gym owner
+  transactions Transaction[]   // Transactions for client users
 }
 
 model Membership {
-  id           Int            @id @default(autoincrement())
-  prize        Float
-  title        String
-  validity     Int
-  description  String?
-  userId       String?
-  user         User?          @relation("UserMemberships", fields: [userId], references: [id])
+  id          String     @id @default(uuid())
+  title       String
+  price       Float
+  validity    String
+  description String
+  gymOwnerId  String     // references the gym owner
+  gymOwner    User       @relation(fields: [gymOwnerId], references: [id])
+  activities  Activity[] @relation("MembershipActivities")
+  faculties   User[]     @relation("MembershipFaculties") // linking trainers to the membership
 }
-model gym {
-  id          String         @id @default(uuid())
+
+
+model Activity {
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  tags        String[]
+  memberships Membership[] @relation("MembershipActivities")
+}
+
+model Gym {
+  id          String     @id @default(uuid())
   name        String
   location    String
-  description String?
+  ownerId     String     // references the gym owner
+  owner       User       @relation(fields: [ownerId], references: [id], name: "UserOwnedGyms")
+  users       User[]     @relation("UserGym")
 }
 
-
-enum Role {
-  GYM_OWNER
-  TRAINER
-  CLIENT
+model Transaction {
+  id          String   @id @default(uuid())
+  amount      Float
+  description String?
+  date        DateTime @default(now())
+  clientId    String
+  client      User     @relation(fields: [clientId], references: [id])
 }
