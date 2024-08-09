@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../db/db';
 import { gymSchema } from '../zod/validator';
 
-const prisma = new PrismaClient();
+
 
 export const createGym = async (req: Request, res: Response) => {
     const userId = req.user?.id; // Get user ID from authenticated user
