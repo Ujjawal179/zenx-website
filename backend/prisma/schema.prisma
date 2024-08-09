@@ -39,20 +39,12 @@ model Membership {
   price       Float
   validity    String
   description String
-  userId  String     // references the gym owner
-  Owner    User       @relation(fields: [userId], references: [id])
-  activities  Activity[] @relation("MembershipActivities")
+  userId      String
+  Owner       User       @relation(fields: [userId], references: [id])
+  tags        String[]   // Array of activity tags
   faculties   User[]     @relation("MembershipFaculties") // linking trainers to the membership
 }
 
-
-model Activity {
-  id          String     @id @default(uuid())
-  title       String
-  description String
-  tags        String[]
-  memberships Membership[] @relation("MembershipActivities")
-}
 
 model Gym {
   id          String     @id @default(uuid())

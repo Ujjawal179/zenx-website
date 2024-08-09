@@ -14,3 +14,12 @@ export const registerSchema = z.object({
     phone: z.string().email('Invalid email address'),
     password: z.string().min(1, 'Password is required'),
   });
+
+  export const membershipSchema = z.object({
+    price: z.number().positive('Price must be a positive number'),
+    title: z.string().min(1, 'Title is required'),
+    validity: z.string().min(1, 'Validity is required'),
+    description: z.string(),
+   tags: z.array(z.string()).optional(), // For associating activities
+    facultyIds: z.array(z.string()).optional(),  // For associating faculties (trainers)
+  });

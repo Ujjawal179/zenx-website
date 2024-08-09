@@ -1,15 +1,13 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '../db/db';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 import dotenv from 'dotenv';
 import { Request, Response } from 'express';
-import { createToken, sendTokenResponse } from '../helpers/helper';
+import { sendTokenResponse } from '../helpers/helper';
 import { registerSchema, loginSchema } from '../zod/validator';
 import { RegisterParams } from '../interface/userInfer';
 
 dotenv.config();
-
-const prisma = new PrismaClient();
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -106,46 +104,12 @@ export const getUser = async (req: Request, res: Response) => {
   res.json(user);
 };
 
-export const postMembership = async (req: Request, res: Response) => {
+
+
+
+export const updateUser = async (req: Request, res: Response) => {
   const userId = req.user?.id; // Get user ID from authenticated user
-  const role = req.user?.role; // Get user role from authenticated user
-  const { price, title, validity, description } = req.body;
-
-  if (!userId || !role) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-
- 
-
-  try {
-    // Validate trainer existence
-    const trainer = await prisma.user.findUnique({
-      where: { id: userId },
-    });
-
-    if (!trainer) {
-      return res.status(404).json({ error: 'Trainer not found' });
-    }
-
-    // Create the membership
-    const membership = await prisma.membership.create({
-      data: {
-        price,
-        title,
-        validity,
-        description,
-        userId, // Assign the membership to the trainer
-      },
-    });
-
-    res.status(201).json(membership);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
-  }
-};
-
-export const getMemberships = async (req: Request, res: Response) => {
-  const userId = req.user?.id; // Get user ID from authenticated user
+  const role = req.user?.role;
 
   if (!userId) {
     return res.status(401).json({ error: 'Unauthorized' });
@@ -161,13 +125,63 @@ export const getMemberships = async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    // Get memberships
-    const memberships = await prisma.membership.findMany({
-      where: { userId },
+    let updatedData: any = {};
+    switch (role) {
+      case 'TRAINER':
+        {
+          const { name, phoneNumber, pictureUrl, ytLink, description } = req.body;
+          updatedData = {
+            name,
+            phoneNumber,
+            pictureUrl,
+            ytLink,
+            description,
+          };
+        }
+        break;
+
+      case 'GYM_OWNER':
+        {
+          const { name, phoneNumber, pictureUrl, ytLink, description, location } = req.body;
+          updatedData = {
+            name,
+            phoneNumber,
+            pictureUrl,
+            ytLink,
+            description,
+            location,
+          };
+        }
+        break;
+
+      case 'CLIENT':
+        {
+          const { name, phoneNumber, weight, height, gender, pictureUrl } = req.body;
+          updatedData = {
+            name,
+            phoneNumber,
+            weight,
+            height,
+            gender,
+            pictureUrl,
+          };
+        }
+        break;
+
+      default:
+        return res.status(400).json({ error: 'Invalid user role' });
+    }
+
+    // Update user details based on role
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: updatedData,
     });
 
-    res.status(200).json(memberships);
+    res.status(200).json(updatedUser);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
