@@ -14,3 +14,8 @@ export const registerSchema = z.object({
     phone: z.string().email('Invalid email address'),
     password: z.string().min(1, 'Password is required'),
   });
+
+  export const gymSchema = z.object({
+    name: z.string().min(1, 'Name is required'),       // Name must be a non-empty string
+    location: z.string().min(1, 'Location is required') // Location must be a non-empty string
+  });
