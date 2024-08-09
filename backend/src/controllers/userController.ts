@@ -115,9 +115,7 @@ export const postMembership = async (req: Request, res: Response) => {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  if (role !== 'TRAINER') {
-    return res.status(403).json({ error: 'Access denied. Only trainers can create memberships.' });
-  }
+ 
 
   try {
     // Validate trainer existence
